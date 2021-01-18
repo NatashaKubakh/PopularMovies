@@ -55,9 +55,9 @@ data class Film (
 
     @SerializedName("vote_average")
     @Expose
-    val voteAverage: Boolean?,
+    val voteAverage: Double?,
 
     @SerializedName("vote_count")
     @Expose
-    val voteCount: Boolean?
+    val voteCount: Int?
 ): Serializable

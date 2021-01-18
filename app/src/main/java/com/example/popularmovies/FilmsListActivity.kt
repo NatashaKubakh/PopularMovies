@@ -20,7 +20,7 @@ class FilmsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_film_list)
-        adapter = FilmAdapter()
+        adapter = FilmAdapter(this)
         binding.filmsList.adapter = adapter
         adapter.filmCallback = object : FilmCallback {
             override fun onClick(film: Film) {
@@ -34,7 +34,8 @@ class FilmsListActivity : AppCompatActivity() {
             .create(FilmListViewModel::class.java)
         viewModel.loadGenreData()
         viewModel.getResults().observe(this, Observer {
-            adapter.filmsList = it
+            adapter.submitList(it)
         })
+
     }
 }

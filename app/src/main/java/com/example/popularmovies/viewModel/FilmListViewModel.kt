@@ -4,53 +4,56 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.popularmovies.database.AppDatabase
-import com.example.popularmovies.model.FilmDataSource
+import com.example.popularmovies.datasources.FilmDataSource
+import com.example.popularmovies.datasources.FilmDataSourceFactory
 import com.example.popularmovies.network.RetrofitInstance
 import com.example.popularmovies.pojo.Film
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.Executors
 
 class FilmListViewModel(application: Application) : AndroidViewModel(application) {
-    private var filmLiveData: LiveData<PagedList<Film>>
-    private lateinit var db: AppDatabase
+    private var filmLiveData: MutableLiveData<FilmDataSource>
+    private var filmPagedLiveData: LiveData<PagedList<Film>> = MutableLiveData<PagedList<Film>>()
+    private var db: AppDatabase
     private var compositeDisposable: CompositeDisposable
 
 
     init {
+        val factory: FilmDataSourceFactory by lazy {
+            FilmDataSourceFactory()
+        }
+        filmLiveData = factory.getMutableLiveData()
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(10)
             .setPageSize(7)
             .build()
-        filmLiveData = initializedPagedListBuilder(config).build()
+        val executor = Executors.newFixedThreadPool(5)
+        filmPagedLiveData = LivePagedListBuilder(factory,config)
+            .setFetchExecutor(executor)
+            .build()
         db = AppDatabase.getInstance(application)
         compositeDisposable = CompositeDisposable()
     }
 
-    fun getResults(): LiveData<PagedList<Film>> = filmLiveData
+    fun getResults(): LiveData<PagedList<Film>> = filmPagedLiveData
 
-    private fun initializedPagedListBuilder(config: PagedList.Config):
-            LivePagedListBuilder<Int, Film> {
-        val dataSourceFactory = object : DataSource.Factory<Int, Film>() {
-            override fun create(): DataSource<Int, Film> {
-                return FilmDataSource()
-            }
-        }
-        return LivePagedListBuilder<Int, Film>(dataSourceFactory, config)
-    }
 
     fun loadGenreData() {
         val disposable = RetrofitInstance.apiService.getGenre()
-            .retry()
             .subscribeOn(Schedulers.io())
             .subscribe({
-                it?.let { it.genres?.let { it1 -> db.genreDao().insertGenreList(it1) } }
+                it?.let {
+                    it.genres?.let { db.genreDao().insertGenreList(it) }
+                    Log.d("GENRE DATA", it.toString())
+                }
             }, {
-                it.message?.let { it1 -> Log.d("TEST_OF_LOADING_DATA", it1) }
+                it.message?.let { it1 -> Log.d("TEST_OF_LOADING_GENRES", it1) }
             })
         compositeDisposable.add(disposable)
     }
