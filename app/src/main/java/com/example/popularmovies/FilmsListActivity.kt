@@ -22,6 +22,13 @@ class FilmsListActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_film_list)
         adapter = FilmAdapter(this)
         binding.filmsList.adapter = adapter
+
+        viewModel = ViewModelProvider.AndroidViewModelFactory(this.application)
+            .create(FilmListViewModel::class.java)
+        viewModel.loadGenreData()
+        viewModel.getFilmsPagedLiveData().observe(this, Observer {
+            adapter.submitList(it)
+        })
         adapter.filmCallback = object : FilmCallback {
             override fun onClick(film: Film) {
                 val intent = SingleFilmActivity.newIntent(
@@ -30,12 +37,6 @@ class FilmsListActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        viewModel = ViewModelProvider.AndroidViewModelFactory(this.application)
-            .create(FilmListViewModel::class.java)
-        viewModel.loadGenreData()
-        viewModel.getResults().observe(this, Observer {
-            adapter.submitList(it)
-        })
 
     }
 }

@@ -18,7 +18,6 @@ class FilmDataSource() :
     ) {
         RetrofitInstance.apiService.getPopular(page = 1).enqueue(object : Callback<Page> {
             override fun onResponse(call: Call<Page>, response: Response<Page>) {
-
                     val filmsList = response.body()?.films
                     filmsList?.let {
                         callback.onResult(filmsList, 0, 2)
@@ -66,10 +65,5 @@ class FilmDataSource() :
                     Log.e("ERROR AFTER", "some error $t")
                 }
             })
-
-    }
-
-    override fun invalidate() {
-        super.invalidate()
     }
 }

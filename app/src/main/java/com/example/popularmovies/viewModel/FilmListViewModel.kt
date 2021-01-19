@@ -31,6 +31,7 @@ class FilmListViewModel(application: Application) : AndroidViewModel(application
         filmLiveData = factory.getMutableLiveData()
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(10)
             .setPageSize(7)
             .build()
         val executor = Executors.newFixedThreadPool(5)
@@ -41,7 +42,7 @@ class FilmListViewModel(application: Application) : AndroidViewModel(application
         compositeDisposable = CompositeDisposable()
     }
 
-    fun getResults(): LiveData<PagedList<Film>> = filmPagedLiveData
+    fun getFilmsPagedLiveData(): LiveData<PagedList<Film>> = filmPagedLiveData
 
 
     fun loadGenreData() {
