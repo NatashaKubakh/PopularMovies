@@ -1,10 +1,11 @@
 package com.example.popularmovies.pojo
 
+import com.example.popularmovies.network.RetrofitInstance.BASE_IMAGE_URL
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Film (
+data class Film(
     @SerializedName("adult")
     @Expose
     val adult: Boolean?,
@@ -60,4 +61,13 @@ data class Film (
     @SerializedName("vote_count")
     @Expose
     val voteCount: Int?
-): Serializable
+) : Serializable {
+
+    fun getFullPosterPath(): String {
+        return BASE_IMAGE_URL + posterPath
+    }
+
+    fun getFullBackDropPath(): String {
+        return BASE_IMAGE_URL + backdropPath
+    }
+}

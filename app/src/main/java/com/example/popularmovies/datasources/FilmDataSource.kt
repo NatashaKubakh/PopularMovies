@@ -18,10 +18,7 @@ class FilmDataSource() :
     ) {
         RetrofitInstance.apiService.getPopular(page = 1).enqueue(object : Callback<Page> {
             override fun onResponse(call: Call<Page>, response: Response<Page>) {
-                    val filmsList = response.body()?.films
-                    filmsList?.let {
-                        callback.onResult(filmsList, 0, 2)
-                    }
+                response.body()?.films?.let { callback.onResult(it, null,2) }
             }
 
             override fun onFailure(call: Call<Page>, t: Throwable) {
@@ -38,10 +35,7 @@ class FilmDataSource() :
         } else 0
         RetrofitInstance.apiService.getPopular(page = page).enqueue(object : Callback<Page> {
             override fun onResponse(call: Call<Page>, response: Response<Page>) {
-                    val filmsList = response.body()?.films
-                    filmsList?.let {
-                        callback.onResult(filmsList, page)
-                    }
+                response.body()?.films?.let { callback.onResult(it, page) }
             }
 
             override fun onFailure(call: Call<Page>, t: Throwable) {
@@ -52,13 +46,10 @@ class FilmDataSource() :
 
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Film>) {
-        RetrofitInstance.apiService.getPopular(page = params.key + 1)
+        RetrofitInstance.apiService.getPopular(page = params.key)
             .enqueue(object : Callback<Page> {
                 override fun onResponse(call: Call<Page>, response: Response<Page>) {
-                        val filmsList = response.body()?.films
-                        filmsList?.let {
-                            callback.onResult(filmsList, params.key + 1)
-                        }
+                    response.body()?.films?.let { callback.onResult(it, params.key + 1) }
                 }
 
                 override fun onFailure(call: Call<Page>, t: Throwable) {

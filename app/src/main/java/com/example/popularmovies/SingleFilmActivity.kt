@@ -28,15 +28,6 @@ class SingleFilmActivity : AppCompatActivity() {
         }
         val film = intent.getSerializableExtra(FILM_RESULT) as Film
         binding.film = film
-        film.backdropPath?.let {
-            val imagePath = RetrofitInstance.BASE_IMAGE_URL + film.backdropPath
-            Glide.with(this)
-                .load(imagePath)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(ColorDrawable(Color.TRANSPARENT))
-                .transform(BlurTransformation(4, 2))
-                .into(binding.layoutMain)
-        }
     }
 
     companion object {

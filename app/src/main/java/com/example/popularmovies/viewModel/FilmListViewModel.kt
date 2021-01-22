@@ -31,11 +31,11 @@ class FilmListViewModel(application: Application) : AndroidViewModel(application
         filmLiveData = factory.getMutableLiveData()
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(10)
-            .setPageSize(7)
+            .setInitialLoadSizeHint(PAGE_SIZE * 2)
+            .setPageSize(PAGE_SIZE)
             .build()
         val executor = Executors.newFixedThreadPool(5)
-        filmPagedLiveData = LivePagedListBuilder(factory,config)
+        filmPagedLiveData = LivePagedListBuilder(factory, config)
             .setFetchExecutor(executor)
             .build()
         db = AppDatabase.getInstance(application)
@@ -62,5 +62,9 @@ class FilmListViewModel(application: Application) : AndroidViewModel(application
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+    }
+
+    companion object {
+        const val PAGE_SIZE = 5
     }
 }

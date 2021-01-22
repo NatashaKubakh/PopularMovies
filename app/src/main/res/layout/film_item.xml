@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -14,9 +13,11 @@
         <variable
             name="genre"
             type="String" />
+
     </data>
 
     <RelativeLayout
+        android:id="@+id/itemFilm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -47,7 +48,8 @@
                     android:id="@+id/image_film"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:ImageUrl="@{film.getFullPosterPath}"/>
 
             </androidx.cardview.widget.CardView>
 
