@@ -10,10 +10,6 @@
             name="film"
             type="com.example.popularmovies.pojo.Film" />
 
-        <variable
-            name="genre"
-            type="String" />
-
     </data>
 
     <RelativeLayout
@@ -119,7 +115,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    android:text="@{genre}"
                     android:textSize="14sp"
                     tools:text="genre" />
             </LinearLayout>

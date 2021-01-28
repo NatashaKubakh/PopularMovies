@@ -13,16 +13,22 @@ import com.example.popularmovies.callbacks.FilmCallback
 import com.example.popularmovies.database.AppDatabase
 import com.example.popularmovies.databinding.FilmItemBinding
 import com.example.popularmovies.pojo.Film
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FilmAdapter(context: Context) :
     PagedListAdapter<Film, FilmAdapter.FilmViewHolder>(diffUtilCallback) {
     private lateinit var binding: FilmItemBinding
     private val genreDao = AppDatabase.getInstance(context).genreDao()
     var filmCallback: FilmCallback? = null
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    class FilmViewHolder(val binding: FilmItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
-
+    class FilmViewHolder(binding: FilmItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val binding: FilmItemBinding = binding
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
@@ -43,11 +49,15 @@ class FilmAdapter(context: Context) :
             }
             film.genreIds?.let {
                 var genresString: String = ""
-                /*   for (id in film.genreIds) {
-                       genresString = genresString + genreDao.getGenreById(id) + " "
-                   }*/
-                holder.binding.genre = genresString
-                Log.d("GENRE STRING", genresString)
+                coroutineScope.launch {
+                    for (id in film.genreIds) {
+                        genresString = genresString + genreDao.getGenreById(id) + " "
+                    }
+                    withContext(Dispatchers.Main) {
+                        Log.d("GENRE STRING", genresString)
+                        holder.binding.tvGenre.text = genresString
+                    }
+                }
             }
         }
         holder.binding.executePendingBindings()
