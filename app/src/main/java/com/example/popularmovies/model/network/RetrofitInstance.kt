@@ -1,4 +1,4 @@
-package com.example.popularmovies.network
+package com.example.popularmovies.model.network
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import retrofit2.Retrofit

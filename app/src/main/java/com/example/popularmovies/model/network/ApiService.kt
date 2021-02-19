@@ -1,12 +1,10 @@
-package com.example.popularmovies.network
+package com.example.popularmovies.model.network
 
-import com.example.popularmovies.pojo.Genre
-import com.example.popularmovies.pojo.Genres
-import com.example.popularmovies.pojo.Page
+import com.example.popularmovies.model.pojo.Genres
+import com.example.popularmovies.model.pojo.Page
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface ApiService {

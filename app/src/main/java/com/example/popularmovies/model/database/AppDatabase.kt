@@ -1,10 +1,10 @@
-package com.example.popularmovies.database
+package com.example.popularmovies.model.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.popularmovies.pojo.Genre
+import com.example.popularmovies.model.pojo.Genre
 
 @Database(entities = [Genre::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

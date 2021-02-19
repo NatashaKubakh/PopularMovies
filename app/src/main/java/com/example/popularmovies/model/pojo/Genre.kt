@@ -1,4 +1,4 @@
-package com.example.popularmovies.pojo
+package com.example.popularmovies.model.pojo
 
 import androidx.annotation.NonNull
 import androidx.room.Entity

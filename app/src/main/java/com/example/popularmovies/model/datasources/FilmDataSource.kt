@@ -1,10 +1,10 @@
-package com.example.popularmovies.datasources
+package com.example.popularmovies.model.datasources
 
 import android.util.Log
 import androidx.paging.PageKeyedDataSource
-import com.example.popularmovies.network.RetrofitInstance
-import com.example.popularmovies.pojo.Film
-import com.example.popularmovies.pojo.Page
+import com.example.popularmovies.model.network.RetrofitInstance
+import com.example.popularmovies.model.pojo.Film
+import com.example.popularmovies.model.pojo.Page
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

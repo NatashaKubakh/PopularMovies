@@ -1,6 +1,6 @@
-package com.example.popularmovies.pojo
+package com.example.popularmovies.model.pojo
 
-import com.example.popularmovies.network.RetrofitInstance.BASE_IMAGE_URL
+import com.example.popularmovies.model.network.RetrofitInstance.BASE_IMAGE_URL
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

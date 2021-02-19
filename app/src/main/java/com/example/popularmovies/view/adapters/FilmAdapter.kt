@@ -1,4 +1,4 @@
-package com.example.popularmovies.adapters
+package com.example.popularmovies.view.adapters
 
 import android.content.Context
 import android.util.Log
@@ -8,11 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popularmovies.R
-import com.example.popularmovies.callbacks.DiffUtilCallBack
-import com.example.popularmovies.callbacks.FilmCallback
-import com.example.popularmovies.database.AppDatabase
+import com.example.popularmovies.view.callbacks.DiffUtilCallBack
+import com.example.popularmovies.view.callbacks.FilmCallback
+import com.example.popularmovies.model.database.AppDatabase
 import com.example.popularmovies.databinding.FilmItemBinding
-import com.example.popularmovies.pojo.Film
+import com.example.popularmovies.model.pojo.Film
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,7 +66,5 @@ class FilmAdapter(context: Context) :
     companion object {
         val diffUtilCallback = DiffUtilCallBack()
     }
-
-
 }
 

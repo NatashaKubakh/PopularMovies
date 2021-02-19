@@ -1,8 +1,8 @@
-package com.example.popularmovies.datasources
+package com.example.popularmovies.model.datasources
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
-import com.example.popularmovies.pojo.Film
+import com.example.popularmovies.model.pojo.Film
 
 class FilmDataSourceFactory() : DataSource.Factory<Int, Film>() {
 

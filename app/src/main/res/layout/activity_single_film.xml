@@ -6,7 +6,7 @@
 
         <variable
             name="film"
-            type="com.example.popularmovies.pojo.Film" />
+            type="com.example.popularmovies.model.pojo.Film" />
 
     </data>
 

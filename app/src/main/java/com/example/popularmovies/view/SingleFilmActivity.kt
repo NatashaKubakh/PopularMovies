@@ -1,22 +1,16 @@
-package com.example.popularmovies
+package com.example.popularmovies.view
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.popularmovies.R
 import com.example.popularmovies.databinding.ActivitySingleFilmBinding
-import com.example.popularmovies.network.RetrofitInstance
-import com.example.popularmovies.pojo.Film
-import com.example.popularmovies.viewModel.FilmListViewModel
-import jp.wasabeef.glide.transformations.BlurTransformation
+import com.example.popularmovies.model.pojo.Film
 
 class SingleFilmActivity : AppCompatActivity() {
-    private lateinit var viewModel: FilmListViewModel
+
     private lateinit var binding: ActivitySingleFilmBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PopularMovies">
-        <activity android:name=".SingleFilmActivity"></activity>
-        <activity android:name=".FilmsListActivity">
+        <activity android:name=".view.SingleFilmActivity"></activity>
+        <activity android:name=".view.FilmsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

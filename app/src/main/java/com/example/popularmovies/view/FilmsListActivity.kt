@@ -1,14 +1,15 @@
-package com.example.popularmovies
+package com.example.popularmovies.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.popularmovies.adapters.FilmAdapter
-import com.example.popularmovies.callbacks.FilmCallback
+import com.example.popularmovies.R
+import com.example.popularmovies.view.adapters.FilmAdapter
+import com.example.popularmovies.view.callbacks.FilmCallback
 import com.example.popularmovies.databinding.ActivityFilmListBinding
-import com.example.popularmovies.pojo.Film
+import com.example.popularmovies.model.pojo.Film
 import com.example.popularmovies.viewModel.FilmListViewModel
 
 class FilmsListActivity : AppCompatActivity() {

@@ -1,11 +1,11 @@
-package com.example.popularmovies.database
+package com.example.popularmovies.model.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.popularmovies.pojo.Genre
+import com.example.popularmovies.model.pojo.Genre
 
 
 @Dao
